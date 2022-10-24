@@ -1,18 +1,11 @@
-# from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import SimpleHTTPRequestHandler, HTTPServer
 
 
-# def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
-#     server_address = ('', 8080)
-#     httpd = server_class(server_address, handler_class)
-#     httpd.serve_forever()
-
-import http.server
-import socketserver
-
-PORT = 8000
-
-Handler = http.server.SimpleHTTPRequestHandler
-
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print("serving at port", PORT)
+def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler):
+    server_address = ('0.0.0.0', 8080)
+    httpd = server_class(server_address, handler_class)
+    print("launching server...")
     httpd.serve_forever()
+
+if __name__ == "main":
+  run()
